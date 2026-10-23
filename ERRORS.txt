@@ -1,0 +1,26 @@
+1. Ошибка при освобождении памяти cur_figure в 
+Model::~Model() {
+	if (pole) { delete[] pole; pole = nullptr; }
+	delete[] cur_figure;
+}
+
+
+
+
+
+
+#######################################
+
+//Model::Model(const Model& other) 
+//{
+//	this->cur_figure = new point[this->mx_elems];
+//	this->pole = new int* [w];
+//	for (int i = 0; i < w; i++) { this->pole[i] = new int[h]; }
+//	for (int i = 0; i < w; i++)
+//		for (int j = 0; j < h; j++) this->pole[i][j] = other.pole[i][j];
+//	for (int i = 0; i < mx_elems; i++)
+//	{
+//		this->cur_figure[i] = other.cur_figure[i];
+//		this->old_figure[i] = other.old_figure[i];
+//	}
+//}

@@ -1,0 +1,65 @@
+{
+  "SolidBrushs": [
+    {
+      "key": 0,
+      "color": "#FFFFFF"
+    },
+    {
+      "key": 1,
+      "color": "#000000"
+    },
+    {
+      "key": 2,
+      "color": "FF0000"
+    },
+    {
+      "key": 3,
+      "color": "#00FF00"
+    },
+    {
+      "key": 4,
+      "color": "#0000FF"
+    },
+    {
+      "key": 5,
+      "color": "#FFFF00"
+    },
+    {
+      "key": 6,
+      "color": "#7851A9"
+    },
+    {
+      "key": 7,
+      "color": "#50C878"
+    },
+    {
+      "key": 8,
+      "color": "#FFADFA"
+    },
+    {
+      "key": 9,
+      "color": "#660033"
+    }
+  ],
+  "TextFormats": [
+    {
+      "key": "MenuButtons",
+      "fontFamily": "PerfectDOSVGA437",
+      "fontSize": 64.0
+    },
+    {
+      "key": "Counter",
+      "fontFamily": "PerfectDOSVGA437",
+      "fontSize": 64.0
+    }
+  ],
+  "TextLayouts": [
+    {
+      "category": "Counter",
+      "name": "Count_Text_Next_Figure",
+      "text": "Следующая фигура:",
+      "width": "1 - model.counter.alpha_pole",
+      "height": "model.counter.height_of_text_nxt_fig"
+    }
+  ]
+}
