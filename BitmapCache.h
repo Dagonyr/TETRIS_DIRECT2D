@@ -10,10 +10,10 @@ class BitmapCache
 public:
 
     BitmapCache(View* pview);
-    void Register(const wchar_t*& key);
-    ID2D1Bitmap* Get(const wchar_t*& key) const;
+    void Register(const std::wstring& key);
+    ID2D1Bitmap* Get(const std::wstring& key) const;
     void Clear();
 private:
     View* pview_ = nullptr;
-    std::unordered_map<const wchar_t*, Microsoft::WRL::ComPtr<ID2D1Bitmap>> cache_;
+    std::unordered_map<std::wstring, Microsoft::WRL::ComPtr<ID2D1Bitmap>> cache_;
 };

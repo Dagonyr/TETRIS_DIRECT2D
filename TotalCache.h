@@ -16,7 +16,7 @@ public:
 	{
 		ParseAssets();
 	}
-	const wchar_t* link_to_assets;
+	std:: wstring link_to_assets;
 	TextFormatCache TextFormatCache_;
 	TextLayoutCache TextLayoutCache_;
 	BrushCache BrushCache_;

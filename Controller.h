@@ -34,7 +34,6 @@ private:
 
 
 	GameLoopState gls_;
-	Counter counter_;
 	void CacheTextElements();
 	HWND hWnd;
 	Model model = Model();
@@ -43,8 +42,8 @@ private:
 	int setka_top;
 	int setka_left;
 	int size_of_cell;
-	int Height;
 	int Width;
+	int Height;
 	bool keys[256] = {false};
 	bool prevKeys[256] = { false };
 	bool is_counter_need_redraw = false;

@@ -18,4 +18,6 @@ namespace GameParams
 	 const float DAS_DELAY = 0.050;  // 150 мс до автоповтора
 	 const float DAS_RATE = 0.266;  // 30 мс между повторами
 	 const auto targetFrameTime = std::chrono::microseconds(16667);
+	 inline int game_state = 1; // 0 - меню, 1 - главный экрна, 2 - игра окончена
 };
+namespace WindowParams {};

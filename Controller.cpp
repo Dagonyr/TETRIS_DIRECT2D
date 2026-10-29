@@ -20,7 +20,7 @@ int Controller::StartGame()
 	{
 		if (model.is_lose) 
 		{
-			model.game_state = 2;
+			GameParams::game_state = 2;
 			UpdateFrame();
 			msg.message = WM_DESTROY;
 			break;
@@ -31,7 +31,7 @@ int Controller::StartGame()
 			DispatchMessage(&msg);
 		}
 		if (msg.message == WM_QUIT) break;
-		switch (model.game_state) 
+		switch (GameParams::game_state) 
 		{
 		case 0:
 			IsMenuRunning();
@@ -108,7 +108,7 @@ void Controller::IsGameRunning()
 void Controller::IsEndRunning() {}
 void Controller::UpdateFrame() 
 {
-	switch (model.game_state) 
+	switch (GameParams::game_state) 
 	{
 	case 0:
 		(*pview).getpRT_()->BeginDraw();
@@ -173,20 +173,7 @@ void Controller::Draw_Setka()
 	this->setka_left = setka_left;
 	this->setka_top = setka_top;
 }
-//void Controller::Draw_Cells()
-//{
-//	for (int i = 0;i< model.w;i++)
-//		for (int j = 0; j < model.h; j++)
-//		{
-//			(*pview).Current_ColorInt_ = Choose_ColorInt(model.pole[i][j+model.generate_h]);
-//
-//			(*pview).NotSafeDrawRect(
-//				setka_left + i*size_of_cell,
-//				setka_top + j*size_of_cell,
-//				setka_left + (i+1) * size_of_cell,
-//				setka_top + (j+1) * size_of_cell);
-//		}
-//}
+
 void Controller::Draw_Cells()
 {
 	std::unordered_map<int, std::vector<D2D1_RECT_F>> byColor;
@@ -227,7 +214,7 @@ void Controller::Draw_Figure()
 }
 void Controller::Draw_Text() 
 {
-	switch (model.game_state) 
+	switch (GameParams::game_state) 
 	{
 	case 1:
 		std::string str = "Counter";
@@ -267,7 +254,7 @@ void Controller::Draw_NextFigure()
 }
 void Controller::IsCounterChanged() 
 {
-	if (counter_.old_counter != counter_.counter) 
+	if (model.counter_.old_counter != model.counter_.counter) 
 	{ 
 		is_counter_need_redraw = true; 
 		if (Counterlayout) Counterlayout->Release();
@@ -282,7 +269,7 @@ void Controller::IsCounterChanged()
 //}
 std::wstring Controller::GetCounter()
 {
-	std::wstring str_counter = std::to_wstring(counter_.counter);
+	std::wstring str_counter = std::to_wstring(model.counter_.counter);
 	int delta = 4 - str_counter.length();
 	if (delta >=0) 
 	{
@@ -293,49 +280,6 @@ std::wstring Controller::GetCounter()
 void Controller::Release() 
 {
 	delete pview;
-}
-std::string Controller::Choose_Color(int i) 
-{
-	std::string Current_Color_ = "BLACK_SOLID";
-	switch (i)
-	{
-	case 0:
-	{
-		Current_Color_ = "RED_SOLID";
-		break;
-	}
-	case 1:
-	{
-		Current_Color_ = "WHITE_ORN_SOLID";
-		break;
-	}
-	case 2:
-	{
-		Current_Color_ = "BLUE_SOLID";
-		break;
-	}
-	case 3:
-	{
-		Current_Color_ = "FIOL_SOLID";
-		break;
-	}
-	case 4:
-	{
-		Current_Color_ = "IZ_SOLID";
-		break;
-	}
-	case 5:
-	{
-		Current_Color_ = "YELLOW_SOLID";
-		break;
-	}
-	case 6:
-	{
-		Current_Color_ = "MAR_SOLID";
-		break;
-	}
-	}
-	return Current_Color_;
 }
 int Controller::Choose_ColorInt(int i)
 {
@@ -423,12 +367,13 @@ Controller::Controller(HINSTANCE hInstance, int nCmdShow)
         this);    // used with multiple windows, NULL
     hWnd = Wnd;
 	pview = new View(hWnd);
-	Height = (*pview).rc_.bottom - (*pview).rc_.top;
-	Width = GameParams::alpha_pole*((*pview).rc_.right - (*pview).rc_.left);
+	RECT rc = (*pview).getRect();
+	Height = rc.bottom - rc.top;
+	Width = GameParams::alpha_pole*(rc.right - rc.left);
 	size_of_cell = (1 - 2 * model.border_hight) * Height / model.h +1;
-	setka_top = (Height -model.h*size_of_cell)/2;
-	setka_left = (Width - model.w * size_of_cell) / 2;
-	Width = ((*pview).rc_.right - (*pview).rc_.left);
+	setka_top = rc.top + (Height -model.h*size_of_cell)/2;
+	setka_left = rc.left + (Width - model.w * size_of_cell) / 2;
+	Width = (rc.right - rc.left);
 }
 LRESULT CALLBACK Controller::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

@@ -4,7 +4,9 @@
 #include <stack>
 #include <string>
 #include <d2d1.h>
+#include <math.h>
 using namespace std;
+using Lookup = std::function<bool(const std::string&, float&)>;
 int get_op(const string& func)
 {
 	if (func[0] == '(' || func[0] == ')') return 0;
@@ -59,7 +61,7 @@ string parcer(string input_str)
 		if (isalpha(input_str[i]))
 		{
 			current_operation = "";
-			while (i < n && (isalpha(input_str[i]) || isdigit(input_str[i])))
+			while (i < n && (isalpha(input_str[i]) || isdigit(input_str[i]) || input_str[i] == '_'))
 			{
 				current_operation += input_str[i];
 				i++;
@@ -132,4 +134,95 @@ D2D1::ColorF FromHexToColorF(const std::string& hex)
 	return D2D1::ColorF(((rgb >> 16) & 0xFF) / 255.0f,
 		((rgb >> 8) & 0xFF) / 255.0f,
 		(rgb & 0xFF) / 255.0f);
+}
+float expr_eval(float a, string func) 
+{
+	if (func == "exp") return exp(a);
+	if (func == "sin") return sin(a);
+	if (func == "cos") return cos(a);
+	if (func == "-u") return -a;
+	if (func == "sh") return sinh(a);
+	if (func == "ch") return cosh(a);
+	return 0.f;
+}
+float expr_eval(float a,float b, string func)
+{
+	if (func == "*") return a * b;
+	if (func == "/") return a / b;
+	if (func == "+") return a + b;
+	if (func == "-") return a - b;
+	if (func == "^") return powf(a, b);
+}
+bool countexpr(const std::string str,const Lookup &search ,float& num) 
+{
+
+	std::stack<string> stk;
+	string str0;
+	string str_buf = parcer(str);
+	int j = 0;
+	int n = str_buf.length();
+	while (str_buf != "")
+	{
+		j = str_buf.find_first_of(' ');
+		if (j == std::string::npos)
+		{
+			str0 = str_buf;
+			str_buf = "";
+		}
+		else str0 = str_buf.substr(0, j);
+		if (!isbinop(str0[0]) && !isprefixop(str0)) stk.push(str0);
+		else
+		{
+			if (isprefixop(str0))
+			{
+				string a = stk.top();
+				stk.pop();
+				float a_f;
+				if (isalpha(a[0]))
+				{
+					if (!search(str0, a_f)) return false;
+				}
+				else
+				{
+					a_f = stof(a);
+				}
+				stk.push(to_string(expr_eval(a_f, str0)));
+			}
+			if (isbinop(str0[0]) && str0.size() == 1)
+			{
+				string a = stk.top();
+				stk.pop();
+				string b = stk.top();
+				stk.pop();
+				float a_f;
+				float b_f;
+				if (isalpha(a[0]))
+				{
+					if (!search(str0, a_f)) return false;
+				}
+				else
+				{
+					a_f = stof(a);
+				}
+				if (isalpha(b[0]))
+				{
+					if (!search(str0, b_f)) return false;
+				}
+				else
+				{
+					b_f = stof(b);
+				}
+				stk.push(to_string(expr_eval(b_f, a_f, str0)));
+			}
+		}
+		if (j == std::string::npos) break;
+		str_buf = str_buf.substr(j + 1, n);
+	}
+	if (isalpha(stk.top()[0])) 
+	{
+		if (!search(stk.top(), num)) return false;
+		else return true;
+	}
+	num = stof(stk.top());
+	return true;
 }

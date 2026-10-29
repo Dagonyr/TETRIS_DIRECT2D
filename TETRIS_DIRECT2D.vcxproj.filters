@@ -51,9 +51,6 @@
     <ClCompile Include="BrushCache.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="parcer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View.h">
@@ -97,6 +94,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ERRORS.txt" />
+    <None Include="assets\ASSETS_INF.json">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
   </ItemGroup>
 </Project>

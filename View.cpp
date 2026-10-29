@@ -118,7 +118,7 @@ void View::NotSafeDrawBitmap(ID2D1Bitmap* pBitmap, const D2D1_RECT_F& destRect, 
         pBitmap,
         &destRect,
         opacity,
-        D2D1_BITMAP_INTERPOLATION_MODE_LINEAR, // или LINEAR / NEAREST
+        D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, // или LINEAR / NEAREST
         nullptr // sourceRect (nullptr = весь битмап)
     );
 }
@@ -208,46 +208,7 @@ void View::NotSafeClear()
 {
     pRT_->Clear(Colors::BLACK);
 }
-void View::Set_Color(std::string Color) 
+ID2D1Bitmap* View::ReColorBitmap(D2D1::ColorF, ID2D1Bitmap* pBitmap) 
 {
-    Current_Color_ = Color;
+    return nullptr;
 }
-//void View::CacheTextFormats(std::string category, const wchar_t* fontFamily, float fontSize, std::string WEIGHT) 
-//{
-//    if (WEIGHT == "BOLD")
-//    {
-//        textFormats.Register(category, fontFamily, fontSize, DWRITE_FONT_WEIGHT_BOLD);
-//    }
-//    else 
-//    {
-//        textFormats.Register(category, fontFamily, fontSize);
-//    }
-//}
-//void View::CacheTextElement(std::string category,std::string name,std::wstring text,float maxWidth,float maxHeight) 
-//{
-//    textLayout.Register(category, name, text, textFormats.Get(category), maxWidth, maxHeight);
-//}
-//void View::CacheColors() 
-//{
-//    brushCache.Register("WHITE_SOLID", Colors::WHITE);
-//    brushCache.Register("RED_SOLID", Colors::RED);
-//    brushCache.Register("BLUE_SOLID", Colors::BLUE);
-//    brushCache.Register("BLACK_SOLID", Colors::BLACK);
-//    brushCache.Register("WHITE_ORN_SOLID", Colors::WHITE_ORN);
-//    brushCache.Register("IZ_SOLID", Colors::IZ);
-//    brushCache.Register("FIOL_SOLID", Colors::FIOL);
-//    brushCache.Register("MAR_SOLID", Colors::MAR);
-//    brushCache.Register("GREEN_SOLID", Colors::GREEN);
-//    brushCache.Register("YELLOW_SOLID", Colors::YELLOW);
-//
-//    brushCache.Register(ColorsInts::WHITE, Colors::WHITE);
-//    brushCache.Register(ColorsInts::RED, Colors::RED);
-//    brushCache.Register(ColorsInts::BLUE, Colors::BLUE);
-//    brushCache.Register(ColorsInts::BLACK, Colors::BLACK);
-//    brushCache.Register(ColorsInts::WHITE_ORN, Colors::WHITE_ORN);
-//    brushCache.Register(ColorsInts::IZ, Colors::IZ);
-//    brushCache.Register(ColorsInts::FIOL, Colors::FIOL);
-//    brushCache.Register(ColorsInts::MAR, Colors::MAR);
-//    brushCache.Register(ColorsInts::GREEN, Colors::GREEN);
-//    brushCache.Register(ColorsInts::YELLOW, Colors::YELLOW);
-//}

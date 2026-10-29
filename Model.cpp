@@ -25,10 +25,10 @@ void Model::generate()
 	switch (cur_el)
 	{
 	case 0:
-		x_st = rand() % 15;
-		cur_figure[0].x = x_st;
-		cur_figure[0].y = 0;
-		cur_figure[1].x = x_st + 1;
+		x_st = rand() % 15;                                    // ##
+		cur_figure[0].x = x_st;                                // ##
+		cur_figure[0].y = 0;                                   
+		cur_figure[1].x = x_st + 1;                            
 		cur_figure[1].y = 0;
 		cur_figure[2].x = x_st + 1;
 		cur_figure[2].y = 1;

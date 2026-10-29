@@ -21,7 +21,6 @@ public:
 	 int type_of_draw = 1; //right
 	 float border_hight = 0.05;
 	 float border_width = 0.1;
-	 int game_state = 0; // 0 - меню, 1 - главный экрна, 2 - игра окончена
 	 bool is_lose = false;
 	 int h = 32;
 	 int w = 16;
@@ -29,6 +28,7 @@ public:
 	 int mx_elems = 4;
 	 int generate_h = mx_elems;
 	 int cur_el = 0;
+	 Counter counter_;
 	 point* cur_figure = nullptr;
 private:
 	void Buf_Current_Figure();
@@ -43,6 +43,5 @@ private:
 	 char error_type = '0';
 	 int is_empty = -1;
 	 int full_h = h + generate_h;
-	 Counter counter_;
 	 point* old_figure = nullptr;
 };

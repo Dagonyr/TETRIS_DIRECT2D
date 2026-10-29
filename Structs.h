@@ -8,10 +8,19 @@ struct point
 	int x;
 	int y;
 };
+struct floatRect
+{
+    float prc_height;
+    float prc_width;
+    float x_start;
+    float y_start;
+};
+
 struct Counter {
     int counter = 0;
     int old_counter = -1;
 };
+
 struct GameLoopState
 {
     using Clock = std::chrono::steady_clock;
@@ -30,7 +39,7 @@ struct TextFormat
     std::string fontFamily;
     float fontSize;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TextFormat, key, fontFamily, fontSize);
+
 struct TextLayout 
 {
     std::string category;
@@ -39,16 +48,54 @@ struct TextLayout
     std::string width;
     std::string height;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TextLayout, category, name, text, width, height);
+
 struct SolidBrush
 {
     int key;
     std::string color;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SolidBrush, key, color)
+
 struct BitmapPath 
 {
     std::string objectName;
     std::string fileName;
 };
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BitmapPath,objectName,fileName)
+
+struct buttonPadding
+{
+    float left;
+    float top;
+    float right;
+    float bottom;
+};
+struct strRect
+{
+    std::string prc_height;
+    std::string prc_width;
+    std::string x_start;
+    std::string y_start;
+};
+
+struct SButton 
+{
+    std::string button_name;
+    std::string texture_name;
+    buttonPadding buttonpadding;
+    strRect button_rect;
+
+};
+struct FButton 
+{
+    std::string button_name;
+    std::string texture_name;
+    buttonPadding buttonpadding;
+    floatRect button_rect;
+
+};
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(strRect, prc_height, prc_width, x_start, y_start)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TextFormat, key, fontFamily, fontSize)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TextLayout, category, name, text, width, height)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SolidBrush, key, color)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BitmapPath, objectName, fileName)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(buttonPadding, left, top, right, bottom)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SButton, button_name, texture_name, buttonpadding)

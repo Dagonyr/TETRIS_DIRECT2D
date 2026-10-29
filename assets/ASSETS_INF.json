@@ -10,7 +10,7 @@
     },
     {
       "key": 2,
-      "color": "FF0000"
+      "color": "#FF0000"
     },
     {
       "key": 3,
@@ -58,8 +58,42 @@
       "category": "Counter",
       "name": "Count_Text_Next_Figure",
       "text": "Следующая фигура:",
-      "width": "1 - model.counter.alpha_pole",
-      "height": "model.counter.height_of_text_nxt_fig"
+      "width": "1 - alpha_pole",
+      "height": "height_of_text_nxt_fig"
+    }
+  ],
+  "Buttons": [
+    {
+      "button_name": "Menu_Enter",
+      "texture_name": "Button_basic.png",
+      "buttonpadding": {
+        "left": 8,
+        "top": 8,
+        "right": 8,
+        "bottom": 8
+      },
+      "button_rect": {
+        "prc_height": "0.15",
+        "prc_width": "0.2",
+        "x_start": "(1 - 2*prc_width)/3 + prc_width",
+        "y_start": "0.35"
+      }
+    },
+    {
+      "button_name": "Menu_Exit",
+      "texture_name": "Button_basic.png",
+      "buttonpadding": {
+        "left": 8,
+        "top": 8,
+        "right": 8,
+        "bottom": 8
+      },
+      "button_rect": {
+        "prc_height": "0.15",
+        "prc_width": "0.2",
+        "x_start": "(1 - 2*prc_width)/3*2 + prc_width",
+        "y_start": "0.4 + prc_height"
+      }
     }
   ]
 }

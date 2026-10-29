@@ -129,7 +129,6 @@
     <ClCompile Include="BrushCache.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="parcer.cpp" />
     <ClCompile Include="TextFormatCache.cpp" />
     <ClCompile Include="TextLayoutCache.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -155,7 +154,7 @@
     <ClInclude Include="Model.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ERRORS.txt" />
+    <None Include="assets\ASSETS_INF.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
